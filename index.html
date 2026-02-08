@@ -6,89 +6,144 @@
 <title>Doctor Appointment</title>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #ffe6eb, #fff);
-  text-align: center;
-  padding: 20px;
+  background: linear-gradient(135deg,#ffe6eb,#fff);
+  text-align:center;
+  padding:20px;
 }
 
-.screen { display:none; max-width:420px; margin:auto; }
-.active { display:block; }
+/* Floating Hearts */
+.hearts{
+position:fixed;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:-1;
+}
+.hearts span{
+position:absolute;
+bottom:-50px;
+font-size:24px;
+opacity:0.7;
+animation:floatUp 10s linear infinite;
+}
+.hearts span:nth-child(1){left:5%;}
+.hearts span:nth-child(2){left:20%;animation-delay:2s;}
+.hearts span:nth-child(3){left:80%;animation-delay:4s;}
+.hearts span:nth-child(4){left:95%;animation-delay:1s;}
+.hearts span:nth-child(5){left:40%;animation-delay:3s;}
+.hearts span:nth-child(6){left:60%;animation-delay:5s;}
 
-button {
-  padding:12px 20px;
-  margin:10px;
-  border:none;
-  border-radius:25px;
-  font-size:16px;
-  cursor:pointer;
+@keyframes floatUp{
+0%{transform:translateY(0);opacity:0;}
+20%{opacity:1;}
+100%{transform:translateY(-110vh);opacity:0;}
 }
 
-.primary { background:#ff4d6d; color:white; }
-.secondary { background:#ccc; }
+/* General */
+.screen{display:none;max-width:420px;margin:auto;}
+.active{display:block;}
 
-.blink { animation:blink 1s infinite; }
-@keyframes blink { 50% {opacity:0.4;} }
-
-.shake { animation:shake 0.3s; }
-@keyframes shake {
-  25% {transform:translateX(-5px);}
-  50% {transform:translateX(5px);}
+button{
+padding:12px 20px;
+margin:10px;
+border:none;
+border-radius:25px;
+font-size:16px;
+cursor:pointer;
 }
 
-.heartbeat { animation:heartbeat 1.2s infinite; }
-@keyframes heartbeat { 25% { transform: scale(1.1); } }
+.primary{background:#ff4d6d;color:white;}
+.secondary{background:#ccc;}
 
-textarea {
-  width:90%;
-  height:80px;
-  border-radius:10px;
-  padding:10px;
+.blink{animation:blink 1s infinite;}
+@keyframes blink{50%{opacity:0.4;}}
+
+.shake{animation:shake 0.3s;}
+@keyframes shake{25%{transform:translateX(-5px);}50%{transform:translateX(5px);}}
+
+.heartbeat{animation:heartbeat 1.2s infinite;}
+@keyframes heartbeat{25%{transform:scale(1.1);}}
+
+textarea{
+width:90%;
+height:80px;
+border-radius:10px;
+padding:10px;
 }
 
-.card {
-  background:white;
-  padding:15px;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-  text-align:left;
-  margin:20px auto;
-  font-size:14px;
+.card{
+background:white;
+padding:15px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+text-align:left;
+margin:20px auto;
+font-size:14px;
 }
 
-.signature {
-  font-family:'Pacifico', cursive;
-  font-size:18px;
+.signature{
+font-family:'Pacifico', cursive;
+font-size:18px;
 }
 
-.flash-note {
-  color:#ff4d6d;
-  font-weight:bold;
-  animation:flash 1s infinite;
+/* ❤️ Gift Heartbeat Animation */
+.gift{
+font-size:80px;
+cursor:pointer;
+animation:giftBeat 1.2s infinite;
 }
 
-@keyframes flash { 50% { opacity:0.2; } }
+@keyframes giftBeat{
+0% {transform:scale(1);}
+20% {transform:scale(1.15);}
+40% {transform:scale(1);}
+60% {transform:scale(1.12);}
+80% {transform:scale(1);}
+100% {transform:scale(1);}
+}
+
+.surprise-text{
+font-size:30px;
+color:#ff4d6d;
+display:none;
+animation:pop 0.6s ease;
+}
+@keyframes pop{
+0%{transform:scale(0);}
+100%{transform:scale(1);}
+}
+
+.flash-note{
+color:#ff4d6d;
+font-weight:bold;
+margin-top:10px;
+}
 </style>
 </head>
 
 <body>
 
+<div class="hearts">
+<span>💖</span><span>❤️</span><span>💗</span>
+<span>💓</span><span>💞</span><span>💕</span>
+</div>
+
 <!-- Screen 1 -->
 <div class="screen active" id="s1">
 <h2>Hello Dr. Nicks 🦷✨</h2>
-<p>Hope your smile is as bright as always</p>
+<p>Hope your smile is as bright as always 🙂 </p>
 <button class="primary blink" onclick="next(2)">Next</button>
 </div>
 
 <!-- Screen 2 -->
 <div class="screen" id="s2">
 <h3>New Appointment 🚨</h3>
-<p>Patient Name: <b>Arbu</b></p>
+<p>Patient Name: <b>Arbu 🤵</b></p>
 <button class="secondary" onclick="reject(this)">Reject</button>
 <button class="primary" onclick="next(3)">Accept</button>
 </div>
@@ -100,9 +155,8 @@ textarea {
 💔 Broken Heart <br>
 😴 Sleepless Nights <br>
 📱 Smiling at phone randomly <br>
-😔 Feels incomplete on days when conversations with you are missing
+😔 Feels incomplete when you don’t talk
 </p>
-<p>Can you treat him?</p>
 <button class="secondary" onclick="reject(this)">No</button>
 <button class="primary" onclick="next(4)">Yes</button>
 </div>
@@ -117,19 +171,48 @@ textarea {
 <!-- Screen 5 -->
 <div class="screen" id="s5">
 <h3>Any advice for the patient?</h3>
-<textarea id="advice" placeholder="Type something sweet..."></textarea><br>
+<textarea id="advice"></textarea>
 <button class="primary" onclick="next(6)">Done</button>
 </div>
 
 <!-- Screen 6 -->
 <div class="screen" id="s6">
 <h3>Would you be Arbu's Valentine? 💖</h3>
-<button class="secondary" onclick="finish(false)">No</button>
-<button class="primary" onclick="finish(true)">Yes</button>
+<button class="secondary" onclick="valentineChoice(false)">No</button>
+<button class="primary" onclick="valentineChoice(true)">Yes</button>
 </div>
 
-<!-- Final -->
+<!-- Screen 7 -->
 <div class="screen" id="s7">
+<h3>What do you like about Arbu? 😊</h3>
+<textarea id="likes"></textarea>
+<button class="primary" onclick="next(8)">Next</button>
+</div>
+
+<!-- Screen 8 -->
+<div class="screen" id="s8">
+<h3>What do you dislike about Arbu? 😢</h3>
+<textarea id="dislikes"></textarea>
+<button class="primary" onclick="showGift()">Finish</button>
+</div>
+
+<!-- Gift Screen -->
+<div class="screen" id="giftScreen">
+<h2>🎀 Tap the gift to reveal your surprise 🎀</h2>
+
+<div class="gift" onclick="openGift()">🎁</div>
+
+<div class="surprise-text" id="surpriseText">SURPRISE! 🎉</div>
+
+<div id="guessSection" style="display:none;">
+<p>Please guess what could be the surprise? 🤭</p>
+<textarea id="guess"></textarea>
+<button class="primary" onclick="finish()">Continue</button>
+</div>
+</div>
+
+<!-- Final Prescription -->
+<div class="screen" id="final">
 
 <h3 id="finalMsg"></h3>
 
@@ -148,14 +231,23 @@ Broken Heart & Sleepless Nights<br><br>
 <b>Advice:</b><br>
 <span id="finalAdvice"></span><br><br>
 
-<b>Duration:</b> Lifetime<br>
+<b>Nicks likes:</b><br>
+<span id="likesFinal"></span><br><br>
+
+<b>Nicks dislikes:</b><br>
+<span id="dislikesFinal"></span><br><br>
+
+<b>Nicks guess:</b><br>
+<span id="guessFinal"></span><br><br>
+
 <b>Status:</b> <span id="status"></span><br><br>
 
 <span class="signature">Dr. Nicks 💖</span>
 </div>
 
 <p class="flash-note">
-📸 Share the screenshot of the prescription to Arbu or download it below and share
+Share the screenshot with Arbu, to reveal your gift.  
+For memories download the prescription 🙂
 </p>
 
 <button class="primary" onclick="saveImage()">Download Prescription</button>
@@ -163,8 +255,9 @@ Broken Heart & Sleepless Nights<br><br>
 </div>
 
 <script>
-let medicineCount = 0;
-let prescribed = "";
+let medicineCount=0;
+let prescribed="";
+let isValentine=false;
 
 function next(n){
 document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -179,7 +272,7 @@ setTimeout(()=>btn.classList.remove('shake'),300);
 function medicine(){
 medicineCount++;
 if(medicineCount<2){
-alert("Are you really sure? This condition looks emotional 😄");
+alert("Are you really sure?");
 }else{
 prescribed="💊 Medicines";
 next(5);
@@ -191,24 +284,42 @@ prescribed="❤️ Love";
 next(5);
 }
 
-function finish(valentine){
+function valentineChoice(choice){
+isValentine=choice;
+next(7);
+}
+
+function showGift(){
 document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-document.getElementById('s7').classList.add('active');
+document.getElementById('giftScreen').classList.add('active');
+}
 
-document.getElementById('prescription').innerText = prescribed;
+function openGift(){
+document.getElementById('surpriseText').style.display="block";
+document.getElementById('guessSection').style.display="block";
+}
 
-document.getElementById('finalAdvice').innerText =
-document.getElementById('advice').value || "Smile more 😊";
+function finish(){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById('final').classList.add('active');
 
-if(valentine){
-document.getElementById('finalMsg').innerText =
-"🎉 Congratulations Dr. Nicks! You healed Arbu ❤️";
-document.getElementById('status').innerText = "✔ Healed";
+document.getElementById('prescription').innerText=prescribed;
+document.getElementById('finalAdvice').innerText=document.getElementById('advice').value;
+document.getElementById('likesFinal').innerText=document.getElementById('likes').value;
+document.getElementById('dislikesFinal').innerText=document.getElementById('dislikes').value;
+
+let guess=document.getElementById('guess').value.trim();
+if(guess===""){
+guess="She needs some more time to understand you";
+}
+document.getElementById('guessFinal').innerText=guess;
+
+if(isValentine){
+document.getElementById('finalMsg').innerText="🎉 Congratulations Dr. Nicks! You healed Arbu ❤️";
+document.getElementById('status').innerText="✔ Healed";
 }else{
-document.getElementById('finalMsg').innerText =
-"Thank you Doctor 🌸";
-document.getElementById('status').innerText =
-"Needs more time to heal 🙁";
+document.getElementById('finalMsg').innerText="Thank you Doctor 🌸";
+document.getElementById('status').innerText="Needs more time to heal 🙁";
 }
 }
 
