@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>Doctor Appointment</title>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -12,6 +12,17 @@
 body {
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg,#ffe6eb,#fff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  margin:0;
+  overflow:hidden;
+}
+
+.app-container{
+  width:100%;
+  max-width:420px;
   text-align:center;
   padding:20px;
 }
@@ -44,8 +55,8 @@ animation:floatUp 10s linear infinite;
 100%{transform:translateY(-110vh);opacity:0;}
 }
 
-/* General */
-.screen{display:none;max-width:420px;margin:auto;}
+/* Screens */
+.screen{display:none;}
 .active{display:block;}
 
 button{
@@ -74,6 +85,7 @@ width:90%;
 height:80px;
 border-radius:10px;
 padding:10px;
+font-size:16px; /* prevents iPhone zoom */
 }
 
 .card{
@@ -91,13 +103,12 @@ font-family:'Pacifico', cursive;
 font-size:18px;
 }
 
-/* ❤️ Gift Heartbeat Animation */
+/* Gift */
 .gift{
 font-size:80px;
 cursor:pointer;
 animation:giftBeat 1.2s infinite;
 }
-
 @keyframes giftBeat{
 0% {transform:scale(1);}
 20% {transform:scale(1.15);}
@@ -121,7 +132,6 @@ animation:pop 0.6s ease;
 .flash-note{
 color:#ff4d6d;
 font-weight:bold;
-margin-top:10px;
 }
 </style>
 </head>
@@ -133,14 +143,14 @@ margin-top:10px;
 <span>💓</span><span>💞</span><span>💕</span>
 </div>
 
-<!-- Screen 1 -->
+<div class="app-container">
+
 <div class="screen active" id="s1">
-<h2>Hello Dr. Nicks 🦷✨</h2>
-<p>Hope your smile is as bright as always 🙂 </p>
+<h2>Hello Dr. Nicks 👩‍⚕️ 🦷✨<h2>
+<p>Hope your smile is as bright as always 🙂</p>
 <button class="primary blink" onclick="next(2)">Next</button>
 </div>
 
-<!-- Screen 2 -->
 <div class="screen" id="s2">
 <h3>New Appointment 🚨</h3>
 <p>Patient Name: <b>Arbu 🤵</b></p>
@@ -148,60 +158,51 @@ margin-top:10px;
 <button class="primary" onclick="next(3)">Accept</button>
 </div>
 
-<!-- Screen 3 -->
 <div class="screen" id="s3">
 <h3>Patient Symptoms</h3>
 <p>
-💔 Broken Heart <br>
-😴 Sleepless Nights <br>
-📱 Smiling at phone randomly <br>
+💔 Broken Heart<br>
+😴 Sleepless Nights<br>
+📱 Smiling at phone randomly<br>
 😔 Feels incomplete when you don’t talk
 </p>
 <button class="secondary" onclick="reject(this)">No</button>
 <button class="primary" onclick="next(4)">Yes</button>
 </div>
 
-<!-- Screen 4 -->
 <div class="screen" id="s4">
 <h3>Prescription Choice</h3>
 <button class="secondary" onclick="medicine()">💊 Medicines</button>
 <button class="primary heartbeat" onclick="chooseLove()">❤️ Love</button>
 </div>
 
-<!-- Screen 5 -->
 <div class="screen" id="s5">
 <h3>Any advice for the patient?</h3>
 <textarea id="advice"></textarea>
 <button class="primary" onclick="next(6)">Done</button>
 </div>
 
-<!-- Screen 6 -->
 <div class="screen" id="s6">
 <h3>Would you be Arbu's Valentine? 💖</h3>
 <button class="secondary" onclick="valentineChoice(false)">No</button>
 <button class="primary" onclick="valentineChoice(true)">Yes</button>
 </div>
 
-<!-- Screen 7 -->
 <div class="screen" id="s7">
 <h3>What do you like about Arbu? 😊</h3>
 <textarea id="likes"></textarea>
 <button class="primary" onclick="next(8)">Next</button>
 </div>
 
-<!-- Screen 8 -->
 <div class="screen" id="s8">
 <h3>What do you dislike about Arbu? 😢</h3>
 <textarea id="dislikes"></textarea>
 <button class="primary" onclick="showGift()">Finish</button>
 </div>
 
-<!-- Gift Screen -->
 <div class="screen" id="giftScreen">
 <h2>🎀 Tap the gift to reveal your surprise 🎀</h2>
-
 <div class="gift" onclick="openGift()">🎁</div>
-
 <div class="surprise-text" id="surpriseText">SURPRISE! 🎉</div>
 
 <div id="guessSection" style="display:none;">
@@ -211,14 +212,11 @@ margin-top:10px;
 </div>
 </div>
 
-<!-- Final Prescription -->
 <div class="screen" id="final">
-
 <h3 id="finalMsg"></h3>
 
 <div class="card" id="prescriptionCard">
 <b>🦷 Dental Prescription</b><br><br>
-
 <b>Doctor:</b> Dr. Nicks<br>
 <b>Patient:</b> Arbu<br><br>
 
@@ -246,11 +244,12 @@ Broken Heart & Sleepless Nights<br><br>
 </div>
 
 <p class="flash-note">
-Share the screenshot with Arbu, to reveal your gift.  
+Share the screenshot with Arbu, to reveal your gift.<br>
 For memories download the prescription 🙂
 </p>
 
 <button class="primary" onclick="saveImage()">Download Prescription</button>
+</div>
 
 </div>
 
@@ -271,23 +270,12 @@ setTimeout(()=>btn.classList.remove('shake'),300);
 
 function medicine(){
 medicineCount++;
-if(medicineCount<2){
-alert("Are you really sure?");
-}else{
-prescribed="💊 Medicines";
-next(5);
-}
+if(medicineCount<2){alert("Are you really sure?");}
+else{prescribed="💊 Medicines";next(5);}
 }
 
-function chooseLove(){
-prescribed="❤️ Love";
-next(5);
-}
-
-function valentineChoice(choice){
-isValentine=choice;
-next(7);
-}
+function chooseLove(){prescribed="❤️ Love";next(5);}
+function valentineChoice(choice){isValentine=choice;next(7);}
 
 function showGift(){
 document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -309,13 +297,11 @@ document.getElementById('likesFinal').innerText=document.getElementById('likes')
 document.getElementById('dislikesFinal').innerText=document.getElementById('dislikes').value;
 
 let guess=document.getElementById('guess').value.trim();
-if(guess===""){
-guess="She needs some more time to understand you";
-}
+if(guess===""){guess="She needs some more time to understand you";}
 document.getElementById('guessFinal').innerText=guess;
 
 if(isValentine){
-document.getElementById('finalMsg').innerText="🎉 Congratulations Dr. Nicks! You healed Arbu ❤️";
+document.getElementById('finalMsg').innerText="🎉 Congratulations Dr. Nicks 👩‍⚕️! You healed Arbu ❤️";
 document.getElementById('status').innerText="✔ Healed";
 }else{
 document.getElementById('finalMsg').innerText="Thank you Doctor 🌸";
