@@ -10,25 +10,25 @@
 
 <style>
 body{
-  margin:0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg,#ffe6eb,#fff);
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#ffe6eb,#fff);
 }
 
-/* Floating Hearts */
+/* Floating hearts */
 .hearts{
-  position:fixed;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  z-index:-1;
+position:fixed;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:-1;
 }
 .hearts span{
-  position:absolute;
-  bottom:-50px;
-  font-size:24px;
-  opacity:0.7;
-  animation:floatUp 10s linear infinite;
+position:absolute;
+bottom:-50px;
+font-size:24px;
+opacity:0.7;
+animation:floatUp 10s linear infinite;
 }
 .hearts span:nth-child(1){left:5%;}
 .hearts span:nth-child(2){left:20%;animation-delay:2s;}
@@ -38,126 +38,96 @@ body{
 .hearts span:nth-child(6){left:60%;animation-delay:5s;}
 
 @keyframes floatUp{
-  0%{transform:translateY(0);opacity:0;}
-  20%{opacity:1;}
-  100%{transform:translateY(-110vh);opacity:0;}
+0%{transform:translateY(0);opacity:0;}
+20%{opacity:1;}
+100%{transform:translateY(-110vh);opacity:0;}
 }
 
-/* Screens */
 .screen{
-  display:none;
-  min-height:100vh;
-  padding:20px;
-  box-sizing:border-box;
+display:none;
+min-height:100vh;
+padding:20px;
+box-sizing:border-box;
 }
+.active{display:block;}
 
-.active{
-  display:block;
-}
-
-/* Centering wrapper */
 .center-box{
-  max-width:420px;
-  margin:0 auto;
-  min-height:calc(100vh - 40px);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  text-align:center;
+max-width:420px;
+margin:0 auto;
+min-height:calc(100vh - 40px);
+display:flex;
+flex-direction:column;
+justify-content:center;
+text-align:center;
 }
 
-/* Final page scroll */
-#s9{
-  overflow-y:auto;
-}
+#s9{overflow-y:auto;}
 
-/* Buttons */
 button{
-  padding:12px 20px;
-  margin:10px;
-  border:none;
-  border-radius:25px;
-  font-size:16px;
-  cursor:pointer;
+padding:12px 20px;
+margin:10px;
+border:none;
+border-radius:25px;
+font-size:16px;
+cursor:pointer;
 }
 
 .primary{background:#ff4d6d;color:white;}
 .secondary{background:#ccc;}
 
-.blink{animation:blink 1s infinite;}
-@keyframes blink{50%{opacity:0.4;}}
-
-.shake{animation:shake 0.3s;}
-@keyframes shake{
-  25%{transform:translateX(-5px);}
-  50%{transform:translateX(5px);}
-}
-
-.heartbeat{animation:heartbeat 1.2s infinite;}
-@keyframes heartbeat{25%{transform:scale(1.1);}}
-
-/* Button row (side-by-side buttons) */
 .button-row{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  flex-wrap:wrap;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
 }
 
-/* Inputs */
 textarea{
-  width:90%;
-  height:80px;
-  border-radius:10px;
-  padding:10px;
-  font-size:16px; /* prevents mobile zoom */
+width:90%;
+height:80px;
+border-radius:10px;
+padding:10px;
+font-size:16px;
 }
 
-/* Card */
 .card{
-  background:white;
-  padding:15px;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-  text-align:left;
-  margin:20px auto;
-  font-size:14px;
+background:white;
+padding:15px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+text-align:left;
+margin:20px auto;
+font-size:14px;
 }
-
 .signature{
-  font-family:'Pacifico', cursive;
-  font-size:18px;
+font-family:'Pacifico', cursive;
+font-size:18px;
 }
 
-/* Gift */
 .gift{
-  font-size:80px;
-  cursor:pointer;
-  animation:giftBeat 1.2s infinite;
+font-size:80px;
+cursor:pointer;
+animation:giftBeat 1.2s infinite;
 }
 @keyframes giftBeat{
-  0% {transform:scale(1);}
-  20% {transform:scale(1.15);}
-  40% {transform:scale(1);}
-  60% {transform:scale(1.12);}
-  80% {transform:scale(1);}
-  100% {transform:scale(1);}
+0%{transform:scale(1);}
+20%{transform:scale(1.15);}
+40%{transform:scale(1);}
+60%{transform:scale(1.12);}
+80%{transform:scale(1);}
+100%{transform:scale(1);}
 }
 
-.surprise-text{
-  font-size:30px;
-  color:#ff4d6d;
-  display:none;
-  animation:pop 0.6s ease;
+.flash-image{
+width:260px;
+border-radius:15px;
+margin:20px auto;
+animation:flash 1s infinite;
 }
-@keyframes pop{
-  0%{transform:scale(0);}
-  100%{transform:scale(1);}
-}
-
-.flash-note{
-  color:#ff4d6d;
-  font-weight:bold;
+@keyframes flash{
+0%{opacity:1;}
+50%{opacity:0.4;}
+100%{opacity:1;}
 }
 </style>
 </head>
@@ -165,230 +135,238 @@ textarea{
 <body>
 
 <div class="hearts">
-  <span>💖</span><span>❤️</span><span>💗</span>
-  <span>💓</span><span>💞</span><span>💕</span>
+<span>💖</span><span>❤️</span><span>💗</span>
+<span>💓</span><span>💞</span><span>💕</span>
 </div>
 
 <!-- s1 -->
 <div class="screen active" id="s1">
-  <div class="center-box">
-    <h2>👩‍⚕️ Hello Dr. Nicks 🦷✨</h2>
-    <p>Hope your smile is as bright as always 🙂</p>
-    <button class="primary blink" onclick="next(2)">Next</button>
-  </div>
+<div class="center-box">
+<h2>👩‍⚕️ Hello Dr. Nicks 🦷✨</h2>
+<p>Hope your smile is as bright as always 🙂</p>
+<button class="primary" onclick="next(2)">Next</button>
+</div>
 </div>
 
 <!-- s2 -->
 <div class="screen" id="s2">
-  <div class="center-box">
-    <h3>New Appointment 🚨</h3>
-    <p>Patient Name: <b>Arbu 🤵</b></p>
-    <div class="button-row">
-      <button class="secondary" onclick="reject(this)">Reject</button>
-      <button class="primary" onclick="next(3)">Accept</button>
-    </div>
-  </div>
+<div class="center-box">
+<h3>New Appointment 🚨</h3>
+<p>Patient Name: <b>Arbu 🤵</b></p>
+<div class="button-row">
+<button class="secondary" onclick="reject(this)">Reject</button>
+<button class="primary" onclick="next(3)">Accept</button>
+</div>
+</div>
 </div>
 
-<!-- s3 -->
+<!-- s3 UPDATED SYMPTOMS -->
 <div class="screen" id="s3">
-  <div class="center-box">
-    <h3>Patient Symptoms</h3>
-    <p>
-      💔 Broken Heart<br>
-      😴 Sleepless Nights<br>
-      📱 Smiling at phone randomly<br>
-      😔 Feels incomplete when you don’t talk
-    </p>
-    <div class="button-row">
-      <button class="secondary" onclick="reject(this)">No</button>
-      <button class="primary" onclick="next(4)">Yes</button>
-    </div>
-  </div>
+<div class="center-box">
+<h3>Patient Symptoms</h3>
+<p>
+📱 Smiling at phone randomly<br>
+😔 Feels incomplete when you don’t talk<br>
+😌 Always thinks about you
+</p>
+<div class="button-row">
+<button class="secondary" onclick="reject(this)">No</button>
+<button class="primary" onclick="next(4)">Yes</button>
+</div>
+</div>
 </div>
 
 <!-- s4 -->
 <div class="screen" id="s4">
-  <div class="center-box">
-    <h3>Prescription Choice</h3>
-    <div class="button-row">
-      <button class="secondary" onclick="medicine()">💊 Medicines</button>
-      <button class="primary heartbeat" onclick="chooseLove()">❤️ Love</button>
-    </div>
-  </div>
+<div class="center-box">
+<h3>Prescription Choice</h3>
+<div class="button-row">
+<button class="secondary" onclick="setMedicine()">💊 Medicines</button>
+<button class="primary" onclick="setLove()">❤️ Love</button>
+</div>
+</div>
 </div>
 
 <!-- s5 -->
 <div class="screen" id="s5">
-  <div class="center-box">
-    <h3>Any advice for the patient?</h3>
-    <textarea id="advice"></textarea>
-    <button class="primary" onclick="next(6)">Done</button>
-  </div>
+<div class="center-box">
+<h3>Any advice for the patient?</h3>
+<textarea id="advice"></textarea>
+<button class="primary" onclick="next(6)">Done</button>
+</div>
 </div>
 
 <!-- s6 -->
 <div class="screen" id="s6">
-  <div class="center-box">
-    <h3>Would you be Arbu's Valentine? 💖</h3>
-    <div class="button-row">
-      <button class="secondary" onclick="valentineChoice(false)">No</button>
-      <button class="primary" onclick="valentineChoice(true)">Yes</button>
-    </div>
-  </div>
+<div class="center-box">
+<h3>Would you be Arbu's Valentine? 💖</h3>
+<div class="button-row">
+<button class="secondary" onclick="valentineChoice(false)">No</button>
+<button class="primary" onclick="valentineChoice(true)">Yes</button>
+</div>
+</div>
 </div>
 
 <!-- s7 -->
 <div class="screen" id="s7">
-  <div class="center-box">
-    <h3>What do you like about Arbu? 😊</h3>
-    <textarea id="likes"></textarea>
-    <button class="primary" onclick="next(8)">Next</button>
-  </div>
+<div class="center-box">
+<h3>What do you like about Arbu? 😊</h3>
+<textarea id="likes"></textarea>
+<button class="primary" onclick="next(8)">Next</button>
+</div>
 </div>
 
 <!-- s8 -->
 <div class="screen" id="s8">
-  <div class="center-box">
-    <h3>What do you dislike about Arbu? 😢</h3>
-    <textarea id="dislikes"></textarea>
-    <button class="primary" onclick="showGift()">Finish</button>
-  </div>
+<div class="center-box">
+<h3>What do you dislike about Arbu? 😢</h3>
+<textarea id="dislikes"></textarea>
+<button class="primary" onclick="showGift()">Finish</button>
+</div>
 </div>
 
 <!-- Gift -->
 <div class="screen" id="giftScreen">
-  <div class="center-box">
-    <h2>🎀 Tap the gift to reveal your surprise 🎀</h2>
-    <div class="gift" onclick="openGift()">🎁</div>
-    <div class="surprise-text" id="surpriseText">SURPRISE! 🎉</div>
+<div class="center-box">
+<h2>🎀 Tap the gift to reveal your surprise 🎀</h2>
+<div class="gift" onclick="openGift()">🎁</div>
 
-    <div id="guessSection" style="display:none;">
-      <p>Please guess what could be the surprise? 🤭</p>
-      <textarea id="guess"></textarea>
-      <button class="primary" onclick="finish()">Continue</button>
-    </div>
-  </div>
+<div id="guessSection" style="display:none;">
+<p>Please guess what could be the surprise? 🤭</p>
+<textarea id="guess"></textarea>
+<button class="primary" onclick="checkGuess()">Continue</button>
+</div>
+</div>
 </div>
 
-<!-- Final -->
+<!-- Guess result -->
+<div class="screen" id="guessResult">
+<div class="center-box">
+<h2 id="guessMessage"></h2>
+<img src="earring.jpg" class="flash-image">
+<button class="primary" onclick="showFinal()">Continue</button>
+</div>
+</div>
+
+<!-- Final Prescription -->
 <div class="screen" id="s9">
-  <div style="max-width:420px;margin:0 auto;text-align:center;">
-    <h2 id="finalMsg"></h2>
+<div style="max-width:420px;margin:0 auto;text-align:center;">
 
-    <div class="card" id="prescriptionCard">
-      <b>🦷 Dental Prescription</b><br><br>
-      <b>Doctor:</b> 👩‍⚕️ Dr. Nicks<br>
-      <b>Patient:</b> Arbu<br><br>
+<h2 id="finalMsg"></h2>
 
-      <b>Diagnosis:</b><br>
-      Broken Heart & Sleepless Nights<br><br>
+<div class="card" id="prescriptionCard">
 
-      <b>Prescribed:</b><br>
-      <span id="prescription"></span><br><br>
+<b>Doctor:</b> 👩‍⚕️ Dr. Nicks<br>
+<b>Patient:</b> Arbu<br><br>
 
-      <b>Advice:</b><br>
-      <span id="finalAdvice"></span><br><br>
+<b>Symptoms:</b><br>
+📱 Smiling at phone randomly<br>
+😔 Feels incomplete when you don’t talk<br>
+😌 Always thinks about you<br><br>
 
-      <b>Nicks likes:</b><br>
-      <span id="likesFinal"></span><br><br>
+<b>Prescribed:</b><br>
+<span id="prescription"></span><br><br>
 
-      <b>Nicks dislikes:</b><br>
-      <span id="dislikesFinal"></span><br><br>
+<b>Advice:</b><br>
+<span id="finalAdvice"></span><br><br>
 
-      <b>Nicks guess:</b><br>
-      <span id="guessFinal"></span><br><br>
+<b>Nicks likes:</b><br>
+<span id="likesFinal"></span><br><br>
 
-      <b>Status:</b> <span id="status"></span><br><br>
+<b>Nicks dislikes:</b><br>
+<span id="dislikesFinal"></span><br><br>
 
-      <span class="signature">👩‍⚕️ Dr. Nicks 💖</span>
-    </div>
+<b>Nicks guess:</b><br>
+<span id="guessFinal"></span><br><br>
 
-    <p class="flash-note">
-      Share the screenshot with Arbu, to reveal your gift.<br>
-      For memories download the prescription 🙂
-    </p>
+<b>Status:</b> <span id="status"></span><br><br>
 
-    <button class="primary" onclick="saveImage()">Download Prescription</button>
-  </div>
+<span class="signature">👩‍⚕️ Dr. Nicks 💖</span>
+</div>
+
+<p>Share the screenshot with Arbu 🙂</p>
+
+<button class="primary" onclick="saveImage()">Download Prescription</button>
+
+</div>
 </div>
 
 <script>
-let medicineCount=0;
 let prescribed="";
 let isValentine=false;
 
 function next(n){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('s'+n).classList.add('active');
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById('s'+n).classList.add('active');
 }
 
 function reject(btn){
-  btn.classList.add('shake');
-  setTimeout(()=>btn.classList.remove('shake'),300);
+btn.classList.add('shake');
+setTimeout(()=>btn.classList.remove('shake'),300);
 }
 
-function medicine(){
-  medicineCount++;
-  if(medicineCount<2){
-    alert("Are you really sure?");
-  } else {
-    prescribed="💊 Medicines";
-    next(5);
-  }
-}
-
-function chooseLove(){
-  prescribed="❤️ Love";
-  next(5);
-}
+function setMedicine(){ prescribed="💊 Medicines"; next(5); }
+function setLove(){ prescribed="❤️ Love"; next(5); }
 
 function valentineChoice(choice){
-  isValentine=choice;
-  next(7);
+isValentine=choice;
+next(7);
 }
 
 function showGift(){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('giftScreen').classList.add('active');
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById('giftScreen').classList.add('active');
 }
 
 function openGift(){
-  document.getElementById('surpriseText').style.display="block";
-  document.getElementById('guessSection').style.display="block";
+document.getElementById('guessSection').style.display="block";
 }
 
-function finish(){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('s9').classList.add('active');
+function checkGuess(){
+let guess=document.getElementById('guess').value.toLowerCase();
+let keywords=["ear","earring","earrings","ring","stud","jewelry","jewellery"];
+let correct=keywords.some(word=>guess.includes(word));
 
-  document.getElementById('prescription').innerText=prescribed;
-  document.getElementById('finalAdvice').innerText=document.getElementById('advice').value;
-  document.getElementById('likesFinal').innerText=document.getElementById('likes').value;
-  document.getElementById('dislikesFinal').innerText=document.getElementById('dislikes').value;
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 
-  let guess=document.getElementById('guess').value.trim();
-  if(guess===""){
-    guess="She needs some more time to understand you";
-  }
-  document.getElementById('guessFinal').innerText=guess;
+if(correct){
+document.getElementById('guessMessage').innerText="You are spot on 👌 I know you like small earrings 🤭";
+}else{
+document.getElementById('guessMessage').innerText="You were almost there 👍, but I know you like small earrings 🤭";
+}
 
-  if(isValentine){
-    document.getElementById('finalMsg').innerText="🎉 Congratulations 👩‍⚕️ Dr. Nicks! You healed Arbu ❤️";
-    document.getElementById('status').innerText="✔ Healed";
-  } else {
-    document.getElementById('finalMsg').innerText="Thank you 👩‍⚕️ Dr. Nicks 🌸";
-    document.getElementById('status').innerText="Needs more time to heal 🙁";
-  }
+document.getElementById('guessResult').classList.add('active');
+}
+
+function showFinal(){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById('s9').classList.add('active');
+
+document.getElementById('prescription').innerText=prescribed;
+document.getElementById('finalAdvice').innerText=document.getElementById('advice').value;
+document.getElementById('likesFinal').innerText=document.getElementById('likes').value;
+document.getElementById('dislikesFinal').innerText=document.getElementById('dislikes').value;
+
+let guess=document.getElementById('guess').value.trim();
+if(guess===""){guess="She needs some more time to understand you";}
+document.getElementById('guessFinal').innerText=guess;
+
+if(isValentine){
+document.getElementById('finalMsg').innerText="🎉 Congratulations 👩‍⚕️ Dr. Nicks! You healed Arbu ❤️";
+document.getElementById('status').innerText="✔ Healed";
+}else{
+document.getElementById('finalMsg').innerText="Thank you 👩‍⚕️ Dr. Nicks 🌸";
+document.getElementById('status').innerText="Needs more time to heal 🙁";
+}
 }
 
 function saveImage(){
-  html2canvas(document.getElementById("prescriptionCard")).then(canvas=>{
-    const link=document.createElement("a");
-    link.download="Arbu_Prescription.png";
-    link.href=canvas.toDataURL();
-    link.click();
-  });
+html2canvas(document.getElementById("prescriptionCard")).then(canvas=>{
+const link=document.createElement("a");
+link.download="Arbu_Prescription.png";
+link.href=canvas.toDataURL();
+link.click();
+});
 }
 </script>
 
