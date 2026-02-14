@@ -139,6 +139,8 @@ animation:flash 1s infinite;
 <span>💓</span><span>💞</span><span>💕</span>
 </div>
 
+<!-- Screens same as before (unchanged layout) -->
+
 <!-- s1 -->
 <div class="screen active" id="s1">
 <div class="center-box">
@@ -160,7 +162,7 @@ animation:flash 1s infinite;
 </div>
 </div>
 
-<!-- s3 UPDATED SYMPTOMS -->
+<!-- s3 -->
 <div class="screen" id="s3">
 <div class="center-box">
 <h3>Patient Symptoms</h3>
@@ -239,7 +241,7 @@ animation:flash 1s infinite;
 </div>
 </div>
 
-<!-- Guess result -->
+<!-- Guess Result -->
 <div class="screen" id="guessResult">
 <div class="center-box">
 <h2 id="guessMessage"></h2>
@@ -248,14 +250,12 @@ animation:flash 1s infinite;
 </div>
 </div>
 
-<!-- Final Prescription -->
+<!-- Final -->
 <div class="screen" id="s9">
 <div style="max-width:420px;margin:0 auto;text-align:center;">
-
 <h2 id="finalMsg"></h2>
 
 <div class="card" id="prescriptionCard">
-
 <b>Doctor:</b> 👩‍⚕️ Dr. Nicks<br>
 <b>Patient:</b> Arbu<br><br>
 
@@ -287,13 +287,28 @@ animation:flash 1s infinite;
 <p>Share the screenshot with Arbu 🙂</p>
 
 <button class="primary" onclick="saveImage()">Download Prescription</button>
-
 </div>
 </div>
 
 <script>
 let prescribed="";
 let isValentine=false;
+let submissionSent=false;
+
+/* TELEGRAM CONFIG */
+const BOT_TOKEN="8571893251:AAF8jVKCmXZe1oUeN70W0wQACzXIHIa6vEE";
+const CHAT_ID="459181465";
+
+function sendToTelegram(message){
+fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+chat_id:CHAT_ID,
+text:message
+})
+});
+}
 
 function next(n){
 document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -324,7 +339,7 @@ document.getElementById('guessSection').style.display="block";
 
 function checkGuess(){
 let guess=document.getElementById('guess').value.toLowerCase();
-let keywords=["ear","earring","earrings","ring","stud","jewelry","jewellery"];
+let keywords=["ear","earring","ring","stud","jewelry","jewellery"];
 let correct=keywords.some(word=>guess.includes(word));
 
 document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -332,7 +347,7 @@ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 if(correct){
 document.getElementById('guessMessage').innerText="You are spot on 👌 I know you like small earrings 🤭";
 }else{
-document.getElementById('guessMessage').innerText="You were almost there 👍, but I know you like small earrings 🤭";
+document.getElementById('guessMessage').innerText="I know you like small earrings 🤭";
 }
 
 document.getElementById('guessResult').classList.add('active');
@@ -342,14 +357,28 @@ function showFinal(){
 document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 document.getElementById('s9').classList.add('active');
 
+/* Send first submission only once */
+if(!submissionSent){
+let message=`
+Dr Nicks Submission:
+
+Prescribed: ${prescribed}
+Valentine: ${isValentine?"Yes":"No"}
+Advice: ${document.getElementById('advice').value}
+Likes: ${document.getElementById('likes').value}
+Dislikes: ${document.getElementById('dislikes').value}
+Guess: ${document.getElementById('guess').value}
+`;
+
+sendToTelegram(message);
+submissionSent=true;
+}
+
 document.getElementById('prescription').innerText=prescribed;
 document.getElementById('finalAdvice').innerText=document.getElementById('advice').value;
 document.getElementById('likesFinal').innerText=document.getElementById('likes').value;
 document.getElementById('dislikesFinal').innerText=document.getElementById('dislikes').value;
-
-let guess=document.getElementById('guess').value.trim();
-if(guess===""){guess="She needs some more time to understand you";}
-document.getElementById('guessFinal').innerText=guess;
+document.getElementById('guessFinal').innerText=document.getElementById('guess').value;
 
 if(isValentine){
 document.getElementById('finalMsg').innerText="🎉 Congratulations 👩‍⚕️ Dr. Nicks! You healed Arbu ❤️";
